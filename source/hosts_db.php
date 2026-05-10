@@ -240,17 +240,27 @@ class Host {
     }
 
     function tableSSL() : string {
+        $tmp = '';
+
         if($this->ssl_type == self::SSL_OFF) {
-            return '<span class="bad">Off</span>';
+            $tmp = '<p class="bad">Off</p>';
         } else if($this->ssl_type == self::SSL_LETSENCRYPT) {
-            return '<span class="good">Let\'s Encrypt</span>';
+            $tmp = '<p class="good">Let\'s Encrypt</p>';
         } else if($this->ssl_type == self::SSL_CUSTOM) {
-            return '<span class="ok">Custom</span>';
+            $tmp = '<p class="ok">Custom</p>';
         } else if($this->ssl_type == self::SSL_CUSTOM_ACME) {
-            return '<span class="ok">Custom_ACME</span>';
+            $tmp = '<p class="ok">Custom_ACME</p>';
         } else {
-            return '<span class="bad">Unknown</span>';
+            $tmp = '<p class="bad">Unknown</p>';
         }
+
+        if($this->http_redirect) {
+            $tmp .= '<p class="subtext good">Http Redirect aktiv</p>';
+        } else {
+            $tmp .= '<p class="subtext bad">Http Redirect inaktiv</p>';
+        }
+
+        return $tmp;
     }
 
     function getSubDomain() {
@@ -272,7 +282,7 @@ class Host {
         
         // HTTP Redirect
 
-        if($this->http_redirect === true) {
+        if($this->http_redirect === true && $this->ssl_type != self::SSL_OFF) {
             $tmp .= '
     # HTTP -> HTTPS Umleitung
 	@http {

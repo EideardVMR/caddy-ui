@@ -7,6 +7,7 @@
             $host->destination_address = $_POST['destination_address'];
             $host->destination_port = $_POST['destination_port'];
             $host->destination_verify_tls = ($_POST['destination_verify_tls'] == 'true');
+            $host->http_redirect = ($_POST['http_redirect'] == 'true');
             $host->waf_state = $_POST['waf_state'];
             $host->websocket_allow = ($_POST['websocket_allow'] == 'true');
             $host->ssl_type = $_POST['ssl_type'];
@@ -113,6 +114,11 @@
         </select>
 
         <div id="ssl-extra-fields-1" style="display: <?= (($host && $host->ssl_type !== Host::SSL_OFF) ? 'block' : 'none') ?>">
+            <label for="http_redirect">HTTP redirect to HTTPS</label>
+            <select id="http_redirect" name="http_redirect">
+            <option value="true" <?= ($host && $host->http_redirect) ? 'selected' : '' ?>>Aktiv</option>
+            <option value="false" <?= ($host && !$host->http_redirect) ? 'selected' : '' ?>>Inaktiv</option>
+            </select>
             <div class="field">
                 <label for="ssl_email">E-Mail</label>
                 <input id="ssl_email" name="ssl_email" type="text" value="<?= $host ? $host->ssl_email : '' ?>" placeholder="z.B. max.mustermann@example.de">

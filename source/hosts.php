@@ -21,7 +21,12 @@
                 }
                 foreach ($hosts as $host) {
                     echo '<tr>';
-                    echo '<td>' . $host->tableDomain() . '</td>';
+                    echo '
+                        <td>
+                            ' . $host->tableDomain() . '
+                            <p class="subtext">' . $host->created_at . ' von ' . $host->created_by . '</p>
+                        </td>
+                    ';
                     echo '<td>' . $host->tableDestination() . '</td>';
                     echo '<td>' . $host->tableSSL() . '</td>';
                     echo '<td>' . ($host->getStatus() ? '<div class="banner on"><span class="dot on"></span>aktiviert</div>' : '<div class="banner off"><span class="dot off"></span>deaktiviert</div>') . '</td>';

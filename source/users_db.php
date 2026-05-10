@@ -2,7 +2,6 @@
 
 class UserDB
 {
-
     static private $users = null;
 
     static public $current_user = null;
@@ -13,6 +12,10 @@ class UserDB
 
         if (self::$users !== null) {
             return self::$users;
+        }
+
+        if(!file_exists(FILE_USERS)) {
+            self::saveUserList();
         }
 
         $users_raw = file_get_contents(FILE_USERS);
@@ -34,7 +37,7 @@ class UserDB
         $user->username = $username;
         $user->name = $name;
         $user->active = $active;
-        
+
         $user->SetPassword($pw);
         if (self::$users === null) {
             self::getUserList();
