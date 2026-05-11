@@ -12,6 +12,9 @@ class SysDB {
     }
 
     static function read(){
+        if(!file_exists(FILE_SYS)) {
+            self::save();
+        }
         $data = file_get_contents(FILE_SYS);
         $data = json_decode($data);
         self::$caddy_require_restart = $data->caddy_require_restart ?? false;

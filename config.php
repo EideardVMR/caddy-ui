@@ -4,8 +4,7 @@ define("FILE_SYS", '/var/www/caddy-ui/db/sys.json');
 define("DIR_HOSTS", '/var/www/caddy-ui/db/hosts/');
 define("DIR_CADDY_HOSTS", '/etc/caddy/sites/');
 define("CADDY_CFG", '/etc/caddy/Caddyfile');
-define("DOMAINS", null);
-define("DOMAINS", ['example.de']);
+define("DOMAINS", ['michelhp.de']);
 //define("LOG_FILE", '/var/www/caddy-ui/std.log');
 //define("LOG_LEVEL", 3); // 1 = nur Fehler, 2 = auch Warnungen,  3 = auch Informationen
 

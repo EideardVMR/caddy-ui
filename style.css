@@ -69,6 +69,11 @@ pre {
     border-radius: 1px solid var(--border);
 }
 
+p.subtext {
+    font-size: 0.6em;
+    color: var(--text-muted);
+}
+
 .menu {
     display: flex;
     justify-content: center;
@@ -255,15 +260,15 @@ table>tbody>tr>td {
     }
 }
 
-span.bad {
+p.bad {
     color: #e07575;
 }
 
-span.good {
-    color: var(--text-primary);
+p.good {
+    color: #3aa05f;
 }
 
-span.ok {
+p.ok {
     color: #b3942f;
 }
 

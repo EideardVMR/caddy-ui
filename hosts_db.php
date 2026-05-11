@@ -130,6 +130,8 @@ class Host {
 
     public string $last_edit = '';
 
+    public array $blocked_ips = [];
+
     public array $versions = [];
 
     public array $errors = [];
@@ -280,8 +282,21 @@ class Host {
     function generateCaddyfile() {
         $tmp = $this->domain . ' {';
         
-        // HTTP Redirect
 
+        if(count($this->blocked_ips) > 0) {
+
+            $tmp .= '
+    # Geblockte IPs
+    @blocked {
+        remote_ip ' . implode(' ', $this->blocked_ips) . '
+    }
+    abort @blocked
+            ';
+
+        }
+
+
+        // HTTP Redirect
         if($this->http_redirect === true && $this->ssl_type != self::SSL_OFF) {
             $tmp .= '
     # HTTP -> HTTPS Umleitung
